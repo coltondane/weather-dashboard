@@ -24,14 +24,16 @@ function getCityData() {
             console.log(response.status);
             // if the response isnt good display it
             if (response.status !== 200) {
-                response.textContent = response.status;
+                alert(`Must Enter Valid City Name: ${response.status}`)
+
             }
             // else return 
             return response.json();
         })
-
+        .then(function(data) {
+            console.log(data);
+        })
     }
-    
 };
 
 //  event listeners
