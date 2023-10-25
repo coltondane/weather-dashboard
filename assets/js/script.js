@@ -11,11 +11,28 @@ const clearSearchBtn = document.querySelector('#clear-history');
 
 // functions
 
-function getCity() {
+function getCityData() {
     // if there is a city value
-    console.log(searchBar.value);
-    return searchBar.value
+    if (searchBar.value) {
+        const cityName = searchBar.value;
+        
+        // get API
+        const apiURL = "https://api.openweathermap.org/data/2.5/weather?q="+ cityName +"&appid=" + apiKey +"&units=imperial";
+
+        fetch(apiURL)
+        .then(function(response) {
+            console.log(response.status);
+            // if the response isnt good display it
+            if (response.status !== 200) {
+                response.textContent = response.status;
+            }
+            // else return 
+            return response.json();
+        })
+
+    }
+    
 };
 
 //  event listeners
- searchBtn.addEventListener('click', getCity);
+ searchBtn.addEventListener('click', getCityData);
