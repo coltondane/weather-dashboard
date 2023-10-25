@@ -11,11 +11,7 @@ const clearSearchBtn = document.querySelector('#clear-history');
 
 // functions
 
-function getCityData() {
-    // if there is a city value
-    if (searchBar.value) {
-        const cityName = searchBar.value;
-
+function getLocation(cityName) {
         // get latitude and longitude
         const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit={limit}&appid=${apiKey}`;
 
@@ -32,7 +28,15 @@ function getCityData() {
         })
         .then(function(data) {
             console.log(data);
-        })
+        })  
+}
+
+function getCityData() {
+    // if there is a city value
+    if (searchBar.value) {
+        const cityName = searchBar.value;
+
+        const lat = getLocation(cityName);
         
         // get weather data API
         const apiURL = `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
