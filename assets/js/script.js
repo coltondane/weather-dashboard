@@ -1,19 +1,21 @@
 // API key
 const apiKey = '457a3c3118899b78bfcb79e03960442b'
 
+// load local storage
+const historyStorage = JSON.parse(localStorage.getItem("searchHistory"));
+
 // document variables
-const searchBarVal = document.querySelector('input').value;
+const searchBar = document.querySelector('#search-bar');
 const searchBtn = document.querySelector('#search-btn');
 const clearSearchBtn = document.querySelector('#clear-history');
 
 // functions
 
- function getCity(cityName) {
+function getCity() {
     // if there is a city value
-    return function () {
-        console.log(cityName);
-    }
- };
+    console.log(searchBar.value);
+    return searchBar.value
+};
 
 //  event listeners
- searchBtn.addEventListener('click', getCity(searchBarVal));
+ searchBtn.addEventListener('click', getCity);
