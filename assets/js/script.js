@@ -46,7 +46,7 @@ function getLocation() {
 function getCityData(lat, lon) {
     // if there is a city value
         // get weather data API
-        const apiURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+        const apiURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
 
         fetch(apiURL)
         .then((response) => {
@@ -72,8 +72,11 @@ function getCityData(lat, lon) {
 
 function displayWeather(data) {
     // store the weather data in variables
-    selectedCity = data.city.name
-    console.log(selectedCity);
+    const selectedLocation = `${data.city.name}, ${data.city.country}`
+    console.log(selectedLocation);
+    const currentWeather = data.list[0].main
+    console.log("weather: ", currentWeather);
+
 }
 
 //  event listeners
