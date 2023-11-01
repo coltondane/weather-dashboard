@@ -1,8 +1,9 @@
+
 // API key
 const apiKey = "457a3c3118899b78bfcb79e03960442b";
 
 // load local storage
-const historyStorage = JSON.parse(localStorage.getItem("searchHistory"));
+// const historyStorage = JSON.parse(localStorage.getItem("searchHistory"));
 
 // document variables
 const searchBar = document.querySelector("#search-bar");
@@ -11,6 +12,12 @@ const searchBtn = document.querySelector("#search-btn");
 const clearSearchBtn = document.querySelector("#clear-history");
 // HTML elements
 const setLocation = document.querySelector(".weather-location");
+const setDate = document.querySelector(".weather-date");
+const setDay = document.querySelector("#day");
+const setTemp = document.querySelector(".display-3");
+const setDescription = document.querySelector("#description")
+const setWindSpeed = document.querySelector("#wind-speed");
+const setHumidity = document.querySelector("#humidity");
 
 // functions
 function getLocation() {
@@ -74,8 +81,17 @@ function displayWeather(data) {
   const description = data.list[0].weather[0].description;
   const currentHumidity = `${data.list[0].main.humidity}%`;
   const windSpeed = `${data.list[0].wind.speed}mph`;
-  const date = data.list[0].dt_txt
-  console.log(description);
+//   const date = dayjs(data.list[0].dt_txt).format(M/D/YYYY);
+const date = new Date();
+
+    // set the display information
+    setLocation.textContent = selectedLocation;
+    setDay.textContent = 
+    setDate.textContent = date;
+    setTemp.textContent = currentTemp;
+    setDescription.textContent = description;
+    setWindSpeed.textContent = windSpeed;
+    setHumidity.textContent = currentHumidity;
 }
 
 //  event listeners
