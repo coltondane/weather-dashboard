@@ -64,6 +64,10 @@ function getCityData(lat, lon) {
             // city name, date, weather icon, temp, humidity, wind speed
             // future 5 day forecast w/ date, weather icon, temp, wind speed, amd humidity
         })
+        // update the search history
+        .then(() => {
+
+        })
 };
 
 //  event listeners
