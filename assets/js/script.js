@@ -11,44 +11,42 @@ const clearSearchBtn = document.querySelector('#clear-history');
 
 // functions
 
-function getLocation(cityName) {
-        // get latitude and longitude
-        const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
-
-        fetch(geoURL)
-        .then(function(response) {
-            console.log(response.status);
-            // if the response isnt good display it
-            if (response.status !== 200) {
-                alert(`Must Enter Valid City Name: ${response.status}`)
-
-            }
-            // else return 
-            return response.json();
-        })
-        .then(function(data) {
-            console.log(data);
-            const longitude = data[0].lon;
-            const latitude = data[0].lat
-            return longitude, latitude;
-        })
-        .then(() => {
-            console.log("Lat and Lon gathered");
-        })
+function getLocation() {
+        // get city name on click
+        if (searchBar.value) {
+            const cityName = searchBar.value;
+            // get latitude and longitude
+            const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
+    
+            fetch(geoURL)
+            .then((response) => {
+                console.log(response.status);
+                // if the response isnt good display it
+                if (response.status !== 200) {
+                    alert(`Must Enter Valid City Name: ${response.status}`)
+    
+                }
+                // else return 
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                const lon = data[0].lon;
+                const lat = data[0].lat
+                console.log(lat, lon);
+                // after gathering the lat and lon run the nnext function
+                getCityData(lat, lon);
+            })
+        }
 };
 
-function getCityData() {
+function getCityData(lat, lon) {
     // if there is a city value
-    if (searchBar.value) {
-        const cityName = searchBar.value;
-
-        getLocation(cityName);
-        
         // get weather data API
-        const apiURL = `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+        const apiURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
         fetch(apiURL)
-        .then(function(response) {
+        .then((response) => {
             console.log(response.status);
             // if the response isnt good display it
             if (response.status !== 200) {
@@ -58,15 +56,15 @@ function getCityData() {
             // else return 
             return response.json();
         })
-        .then(function(data) {
-            console.log(data);
-            console.log(data.main);
+        .then((data) => {
+            console.log("all data: ", data);
+            console.log("City Data: ", data.city);
+            console.log("Future Data: ", data.list);
             // current and future conditions
             // city name, date, weather icon, temp, humidity, wind speed
             // future 5 day forecast w/ date, weather icon, temp, wind speed, amd humidity
         })
-    }
 };
 
 //  event listeners
- searchBtn.addEventListener('click', getCityData);
+ searchBtn.addEventListener('click', getLocation);
