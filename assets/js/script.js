@@ -63,12 +63,17 @@ function getCityData(lat, lon) {
             // current and future conditions
             // city name, date, weather icon, temp, humidity, wind speed
             // future 5 day forecast w/ date, weather icon, temp, wind speed, amd humidity
+            displayConditions(data);
         })
         // update the search history
         .then(() => {
 
         })
 };
+
+function displayConditions(data) {
+
+}
 
 //  event listeners
  searchBtn.addEventListener('click', getLocation);
