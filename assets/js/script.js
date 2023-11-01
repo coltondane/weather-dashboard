@@ -6,8 +6,11 @@ const historyStorage = JSON.parse(localStorage.getItem("searchHistory"));
 
 // document variables
 const searchBar = document.querySelector('#search-bar');
+
 const searchBtn = document.querySelector('#search-btn');
 const clearSearchBtn = document.querySelector('#clear-history');
+
+const setLocation = document.querySelector('.weather-location');
 
 // functions
 
@@ -63,16 +66,14 @@ function getCityData(lat, lon) {
             // current and future conditions
             // city name, date, weather icon, temp, humidity, wind speed
             // future 5 day forecast w/ date, weather icon, temp, wind speed, amd humidity
-            displayConditions(data);
-        })
-        // update the search history
-        .then(() => {
-
+            displayWeather(data);
         })
 };
 
-function displayConditions(data) {
-
+function displayWeather(data) {
+    // store the weather data in variables
+    selectedCity = data.city.name
+    console.log(selectedCity);
 }
 
 //  event listeners
