@@ -23,17 +23,17 @@ const forecastContainer = document.querySelector("#forecast-container");
 
 
 // functions
-function displaySearchHistory {
-  for (let i = 0; i < storageArray.length; i++) {
+// function displaySearchHistory {
+//   for (let i = 0; i < storageArray.length; i++) {
     
     
-  }
-}
+//   }
+// }
 function getLocation() {
   // get city name on click
   if (searchBar.value) {
     const cityName = searchBar.value;
-    displaySearchHistory(cityName);
+    // displaySearchHistory(cityName);
     // get latitude and longitude
     const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
 
@@ -84,6 +84,8 @@ function getCityData(lat, lon) {
 }
 
 function displayWeather(data) {
+  // clear the forecast container
+  forecastContainer.innerHTML = '';
   // store the weather data in variables
   // city name-, date-, weather icon, temp-, humidity-, wind speed-
   const selectedLocation = `${data.city.name}, ${data.city.country}`;
@@ -128,9 +130,10 @@ function displayWeather(data) {
     divContainer.appendChild(icon);
     divContainer.appendChild(forecastHumidity);
     divContainer.appendChild(forecastWind);
-    divContainer.appendChild(forecastHumidity);
+    divContainer.appendChild(forecastTemp);
     
     // append the weather data for each one
+    forecastContainer.appendChild(divContainer);
   } 
 
 }
