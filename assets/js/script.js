@@ -34,6 +34,7 @@ function displaySearchHistory() {
     // add an event listener to each item to search that city on click
     setHistory.addEventListener("click", function (event) {
       if (event.target.tagName === "LI") {
+        console.log(event.target.textContent);
         // Check if the clicked element is an li
         getLocation(event.target.textContent);
       };
@@ -52,9 +53,9 @@ function getLocation() {
       // add the city to the search history in local storage
       storageArray.push(cityName);
       localStorage.setItem("searchHistory", JSON.stringify(storageArray));
+      // refresh the search history
       displaySearchHistory();
     }
-    // displaySearchHistory(cityName);
     // get latitude and longitude
     const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
 
@@ -69,10 +70,8 @@ function getLocation() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         const lon = data[0].lon;
         const lat = data[0].lat;
-        console.log(lat, lon);
         // after gathering the lat and lon run the next function
         getCityData(lat, lon);
       });
@@ -158,5 +157,6 @@ function displayWeather(data) {
   }
 }
 
+displaySearchHistory();
 //  event listeners
 searchBtn.addEventListener("click", getLocation);
