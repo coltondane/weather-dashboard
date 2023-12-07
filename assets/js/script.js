@@ -33,11 +33,8 @@ function displaySearchHistory() {
     cityHistory.className = "history-list";
     // add an event listener to each item to search that city on click
     setHistory.addEventListener("click", function (event) {
-      if (event.target.tagName === "LI") {
-        console.log(event.target.textContent);
-        // Check if the clicked element is an li
-        getLocation(event.target.textContent);
-      };
+      console.log(event);
+      getLocation(storageArray[i]);
     });
     // append
     setHistory.appendChild(cityHistory);
