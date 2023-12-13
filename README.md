@@ -23,3 +23,4 @@
 - [My GitHub](https://github.com/coltondane)
     coltondane.py@gmail.com
 ## Screenshot(s)
+<img width="1470" alt="Screenshot 2023-12-13 at 3 57 03 PM" src="https://github.com/coltondane/weather-dashboard/assets/113216904/c62550a9-f563-4223-a7a3-822728a9a404">
