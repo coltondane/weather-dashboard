@@ -23,56 +23,54 @@ const forecastContainer = document.querySelector("#forecast-container");
 
 // functions
 function displaySearchHistory() {
-  console.log("displaySearchHistory");
   setHistory.innerHTML = "";
-  for (let i = 0; i < storageArray.length; i++) {
-    // create a new li for each item in the array
-    const cityHistory = document.createElement("li");
-    // set the text content to the array item
-    cityHistory.textContent = storageArray[i];
-    cityHistory.className = "history-list";
-    // add an event listener to each item to search that city on click
-    setHistory.addEventListener("click", function (event) {
-      console.log(event);
-      getLocation(storageArray[i]);
+  storageArray.forEach((city) => {
+    var button = document.createElement("button");
+    button.setAttribute("value", city)
+    button.textContent = city;
+    button.className = "history-list";
+    button.addEventListener("click", function (event) {
+      console.log(this.value);
+      getLocation(this.value);
     });
-    // append
-    setHistory.appendChild(cityHistory);
-  }
+    setHistory.appendChild(button);
+
+  });
 }
 
-function getLocation() {
-  // get city name on click
-  if (searchBar.value) {
-    const cityName = searchBar.value;
-    // add the city to search history if it isn't already there
-    if (!storageArray.includes(cityName)) {
-      // add the city to the search history in local storage
-      storageArray.push(cityName);
-      localStorage.setItem("searchHistory", JSON.stringify(storageArray));
-      // refresh the search history
-      displaySearchHistory();
-    }
-    // get latitude and longitude
+function getLocation(city) {
+
+  var cityName = '';
+  if (searchBar.value === '') {
+     cityName = city;
+  } else {
+     cityName = searchBar.value;
+  }
+  
     const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
 
     fetch(geoURL)
       .then((response) => {
-        console.log(response.status);
+        // console.log(response.status);
         // if the response isn't good display it
-        if (response.status !== 200) {
-          alert(`Must Enter Valid City Name: ${response.status}`);
-        }
+        // if (response.status !== 200) {
+        //   alert(`Must Enter Valid City Name: ${response.status}`);
+        // }
         // else return
         return response.json();
       })
       .then((data) => {
         const lon = data[0].lon;
         const lat = data[0].lat;
+        const selectedLocation = data[0].name;
+        if(!storageArray.includes(selectedLocation)) {
+          storageArray.push(selectedLocation);
+          localStorage.setItem("searchHistory", JSON.stringify(storageArray));
+          displaySearchHistory();
+        };
         // after gathering the lat and lon run the next function
         getCityData(lat, lon);
       });
-  }
 }
 
 function getCityData(lat, lon) {
@@ -82,7 +80,7 @@ function getCityData(lat, lon) {
 
   fetch(apiURL)
     .then((response) => {
-      console.log(response.status);
+      // console.log(response.status);
       // if the response isn't good display it
       if (response.status !== 200) {
         alert(`Must Enter Valid City Name: ${response.status}`);
@@ -91,9 +89,9 @@ function getCityData(lat, lon) {
       return response.json();
     })
     .then((data) => {
-      console.log("all data: ", data);
-      console.log("City Data: ", data.city);
-      console.log("Future Data: ", data.list);
+    //   console.log("all data: ", data);
+    //   console.log("City Data: ", data.city);
+    //   console.log("Future Data: ", data.list);
       // current and future conditions
       // future 5 day forecast w/ date, weather icon, temp, wind speed, amd humidity
       displayWeather(data);
@@ -124,7 +122,7 @@ function displayWeather(data) {
   const forecast = data.list.filter((list) => {
     return list.dt_txt.includes("12:00:00");
   });
-  console.log(forecast);
+  // console.log(forecast);
 
   // create a new child div for each day
   for (let i = 0; i < forecast.length; i++) {

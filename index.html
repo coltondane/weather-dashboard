@@ -13,54 +13,61 @@
     />
   </head>
   <body>
-    <main>
-      <header>Weather Data Dashboard</header>
-      <section class="search">
-        <aside>
+    <header>
+      <h1>Weather Dashboard</h1>
+    </header>
+    <main style="border: 1px solid black">
+      <section class="search row" style="border: 1px solid red">
+        <aside class="col-3">
           <input id="search-bar" type="text" placeholder="Enter City Name" />
           <button id="search-btn">Search</button>
           <section class="search-history">
             <h3>Search History</h3>
-            <ul id="history-display">
-            </ul>
+            <div
+              id="history-display"
+              style="display: flex; flex-direction: column"
+            ></div>
             <button id="clear-history">Clear Search History</button>
           </section>
         </aside>
-      </section>
-      <section class="display">
-        <div class="page-content page-container" id="page-content">
-          <div class="padding">
-            <div class="row container d-flex justify-content-center">
-              <div class="col-lg-8 grid-margin stretch-card">
-                <!--weather card-->
-                <div class="card card-weather">
-                  <div class="card-body">
-                    <div class="weather-date-location">
-                      <h3 id="day"></h3>
-                      <p class="text-gray">
-                        <span class="weather-date"></span>
-                        <span class="weather-location"></span>
-                      </p>
-                    </div>
-                    <div class="weather-data d-flex">
-                      <div class="mr-auto">
-                        <h4 class="display-3">
-                        </h4>
-                        <p id="description"></p>
-                        <p id="wind-speed"></p>
-                        <p id="humidity"></p>
+        <section class="display col-9">
+          <div class="page-content page-container" id="page-content">
+            <div class="padding">
+              <div class="row container d-flex justify-content-center">
+                <div class="col-lg-12 grid-margin stretch-card">
+                  <!--weather card-->
+                  <div class="card card-weather">
+                    <div class="card-body">
+                      <div class="weather-date-location">
+                        <h3 id="day"></h3>
+                        <p class="text-gray">
+                          <span class="weather-date"></span>
+                          <span class="weather-location"></span>
+                        </p>
+                      </div>
+                      <div class="weather-data d-flex">
+                        <div class="mr-auto">
+                          <h4 class="display-3"></h4>
+                          <p id="description"></p>
+                          <p id="wind-speed"></p>
+                          <p id="humidity"></p>
+                        </div>
                       </div>
                     </div>
+                    <div class="card-body p-0">
+                      <div
+                        id="forecast-container"
+                        class="d-flex weakly-weather"
+                        style="display: flex; justify-content: space-around"
+                      ></div>
+                    </div>
                   </div>
-                  <div class="card-body p-0">
-                    <div id="forecast-container" class="d-flex weakly-weather"></div>
-                  </div>
+                  <!--weather card ends-->
                 </div>
-                <!--weather card ends-->
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
     </main>
 
